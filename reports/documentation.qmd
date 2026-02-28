@@ -1,1 +1,130 @@
-# NEW FILE
+---
+title: "documentation"
+format: html
+editor: visual
+---
+
+## 2/28: DNNs: The Umbrella
+
+#### Def'n: any neural network with multiple hidden layers
+
+Types:
+
+-   FNNs
+
+-   RNNs
+
+-   Transformers
+
+<div>
+
+### FFNs (Feedforward Neural Networks) 
+
+"Basic" neural nets:
+
+$$
+Input \to hidden \to output
+$$
+
+Each observation is treated independently, the network only moves information forward. Used in:
+
+-   tabular prediction
+
+-   classification
+
+-   regression
+
+i.e. the basics.
+
+Common packages/models:
+
+Scikit, TensorFlow, Numpy,
+
+</div>
+
+<div>
+
+### RNNs (Recurrent Neural Network)
+
+Introduces **memory**.
+
+$$
+x_t \to x_t + h_{t-1}
+$$
+
+where $x_t$ is independent input and $h_{t-1}$ is past memory, each step updates $h_t$. Common in:
+
+-   Time series analysis:
+
+    -   ARMA/ARIMA/ARMAX
+
+#### LSTM: "Long Short-Term Memory"
+
+LSTMs are RNNs with memory that is controlled. The model determines what to remember, what to forget, and how to shape its output by learning through gates:
+
+-   Forget Gate: $f_t = \sigma(W_f[h_{t-1},x_t])$
+
+-   Input Gate: $i_t = \sigma(W_i[h_{t-1},x_t])$
+
+-   Output Gate: $o_t = \sigma (W_o[h_{t-1},x_t])$
+
+LSTM keeps a cell state $C_t$ that acts as a storage of relevant history, updating via:
+
+$$
+C_t = f_t*C_{t-1} + i_t * \tilde{C_t}
+$$
+
+Some memory is kept but only parts of it.
+
+</div>
+
+<div>
+
+### Transformers:
+
+A special type of neural network architecture designed to understand relationships inside sequences. Most older models process data one step at a time, but transformers parallelize and create weighted understandings of relationships in the data.
+
+Each input gets transformed into three vectors:
+
+-   **Query:** What am I looking for?
+
+-   **Key:** What do I represent?
+
+-   **Value:** What information do I carry?
+
+$$
+Attention = softmax(QK^T)V
+$$
+
+Transformers score items & blend information based on relevancy. This is much more powerful than trying to discover relationships sequentially. Transformers run many in parallel and each head learns different relationships such as:
+
+-   short-term
+
+-   long-term
+
+-   causal
+
+-   seasonal
+
+-   structural.
+
+Since transformers read everything at once, we use positional encoding to inject time step, word position, and sequence index into the data. The full pipeline is:
+
+$$Input \to embedding \to self \space attention \to feedforward \space network \to repeat \to output
+$$
+
+#### BERT:
+
+#### GPT:
+
+</div>
+
+| Model Type  | Intuition                                             |
+|-------------|-------------------------------------------------------|
+| DNNs        | Neural network with multiple hidden layers            |
+| FNNs        | Standard DNN; no memory but parallelizable            |
+| RNNs        | Introduces time & sequence awareness                  |
+| LSTM        | Smart memory system that walks through time           |
+| Transformer | Global relationship mapper that sees all time at once |
+
+#### 
